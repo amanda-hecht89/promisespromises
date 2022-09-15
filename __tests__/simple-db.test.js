@@ -25,4 +25,14 @@ describe('simple database', () => {
     expect(result).toEqual(fish); 
   });
 
+  it('save should save an obj', async () => {
+    const objToSave = {
+      name: 'weee',
+      age: 'new'
+    };
+    const db = new SimpleDb(TEST_DIR);
+    const id = await db.save(objToSave);
+    expect(await db.get(id)).toEqual(objToSave);
+  });
+
 });
