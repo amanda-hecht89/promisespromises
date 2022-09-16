@@ -1,7 +1,7 @@
 const fs = require('fs/promises');
 const crypto = require('crypto');
 const path = require('path');
-const SimpleDb = require('../lib/simple-db');
+const Refactor = require('../lib/refactor');
 
 const { CI, HOME } = process.env;
 const BASE_DIR = CI ? HOME : __dirname;
@@ -20,7 +20,7 @@ describe('simple database', () => {
     };
     const id = crypto.randomBytes(8).toString('hex');
     await fs.writeFile(`${TEST_DIR}/${id}.json`, JSON.stringify(fish));
-    const db = new SimpleDb(TEST_DIR);
+    const db = new Refactor(TEST_DIR);
     const result = await db.get(id);
     expect(result).toEqual(fish); 
   });
@@ -30,7 +30,7 @@ describe('simple database', () => {
       name: 'weeee',
       age: 'new'
     };
-    const db = new SimpleDb(TEST_DIR);
+    const db = new Refactor(TEST_DIR);
     const obj = await db.save(objToSave);
     expect(await db.get(obj.id)).toEqual({ ...objToSave, id: expect.any(String) });
   });
@@ -42,7 +42,7 @@ describe('simple database', () => {
       { age: 'old enough', name: 'woo' },
     ];
 
-    const db = new SimpleDb(TEST_DIR);
+    const db = new Refactor(TEST_DIR);
     objects.forEach(async object => {
       await db.save(object);
     });
