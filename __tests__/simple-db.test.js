@@ -25,13 +25,25 @@ describe('simple database', () => {
     expect(result).toEqual(fish); 
   });
 
-  it('save should save an obj', async () => {
+  // it('save should save an obj', async () => {
+  //   const objToSave = {
+  //     name: 'weee',
+  //     age: 'new'
+  //   };
+  //   const db = new SimpleDb(TEST_DIR);
+  //   const obj = await db.save(objToSave);
+  //   expect(await db.get(obj.id)).toEqual({ ...objToSave, id: expect.any(String) });
+  // });
+
+  it('save should save an object', async () => {
     const objToSave = {
-      name: 'weee',
+      name: 'weeee',
       age: 'new'
     };
     const db = new SimpleDb(TEST_DIR);
+
     const obj = await db.save(objToSave);
+    
     expect(await db.get(obj.id)).toEqual({ ...objToSave, id: expect.any(String) });
   });
 
