@@ -31,8 +31,8 @@ describe('simple database', () => {
       age: 'new'
     };
     const db = new SimpleDb(TEST_DIR);
-    const id = await db.save(objToSave);
-    expect(await db.get(id)).toEqual(objToSave);
+    const obj = await db.save(objToSave);
+    expect(await db.get(obj.id)).toEqual({ ...objToSave, id: expect.any(String) });
   });
 
 });
